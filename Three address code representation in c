@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int a, b, c, d;
+    
+    printf("Enter values for b, c, and d: ");
+    scanf("%d %d %d", &b, &c, &d);
+
+    // Three-address code
+    int temp1 = c * d;
+    int temp2 = b + temp1;
+    a = temp2;
+
+    printf("Three-address code:\n");
+    printf("1. t1 = c * d\n");
+    printf("2. t2 = b + t1\n");
+    printf("3. a = t2\n");
+
+    printf("Result: a = %d\n", a);
+
+    return 0;
+}
