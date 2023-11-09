@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int countConsonants(char *str) {
+    int count = 0;
+    
+    while (*str) {
+        char currentChar = tolower(*str);
+        
+        if (currentChar >= 'a' && currentChar <= 'z' && currentChar != 'a' && currentChar != 'e' && currentChar != 'i' && currentChar != 'o' && currentChar != 'u') {
+            count++;
+        }
+        
+        str++;
+    }
+    
+    return count;
+}
+
+int main() {
+    char inputString[100];
+    
+    printf("Enter a string: ");
+    fgets(inputString, sizeof(inputString), stdin);
+
+    int consonantCount = countConsonants(inputString);
+    
+    printf("Number of consonants: %d\n", consonantCount);
+
+    return 0;
+}
