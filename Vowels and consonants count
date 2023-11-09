@@ -1,0 +1,17 @@
+%{
+int v=0,c=0;
+%}
+%%
+[aeiouAEIOU] {v++; printf("\n vowel:%s",yytext);}
+[a-z A-Z] {c++; printf("\n consonant:%s",yytext);}
+%%
+int yywrap(void){}
+int main()
+{
+printf("\n enter the letter\n");
+yylex();
+printf("total vowels are:%d,"
+          "total consonants are:%d",
+                 v ,c);
+return 0;
+}
