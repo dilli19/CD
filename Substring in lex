@@ -1,0 +1,13 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[aA][bB][cC]   { printf("ABC"); }
+.|\n            { putchar(yytext[0]); }
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
