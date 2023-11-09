@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <ctype.h>
+
+// Function prototypes
+int expr();
+int term();
+int factor();
+
+// Global variables
+char input[100];
+int position = 0;
+
+int main() {
+    printf("Enter an arithmetic expression: ");
+    fgets(input, sizeof(input), stdin);
+
+    int result = expr();
+
+    if (input[position] == '\0') {
+        printf("Parsing successful. Result: %d\n", result);
+    } else {
+        printf("Parsing error.\n");
+    }
+
+    return 0;
+}
+
+// Recursive descent parsing functions
+int expr() {
+    int value = term();
+
+    while (input[position] == '+' || input[position] == '-') {
+        char op = input[position++];
+        int nextTerm = term();
+
+        if (op == '+') {
+            value += nextTerm;
+        } else {
+            value -= nextTerm;
+        }
+    }
+
+    return value;
+}
+
+int term() {
+    int value = factor();
+
+    while (input[position] == '*' || input[position] == '/') {
+        char op = input[position++];
+        int nextFactor = factor();
+
+        if (op == '*') {
+            value *= nextFactor;
+        } else {
+            if (nextFactor != 0) {
+                value /= nextFactor;
+            } else {
+                printf("Error: Division by zero.\n");
+                // You might want to handle this error differently in a more complete program.
+                return 0;
+            }
+        }
+    }
+
+    return value;
+}
+
+int factor() {
+    if (isdigit(input[position])) {
+        return input[position++] - '0';
+    } else if (input[position] == '(') {
+        position++; // Consume '('
+        int value = expr();
+        
+        if (input[position] == ')') {
+            position++; // Consume ')'
+            return value;
+        } else {
+            printf("Error: Unmatched parenthesis.\n");
+            // You might want to handle this error differently in a more complete program.
+            return 0;
+        }
+    } else {
+        printf("Error: Invalid factor.\n");
+        // You might want to handle this error differently in a more complete program.
+        return 0;
+    }
+}
