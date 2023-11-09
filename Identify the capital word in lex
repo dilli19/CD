@@ -1,0 +1,14 @@
+%{
+%}
+%%
+[A-Z] {printf("%s is a capital letter\n",yytext);}
+[a-z 0-9] {printf("");}
+%%
+int yywrap(void){}
+int main()
+{
+printf("\n enter the word");
+yylex();
+printf("\n");
+return 0;
+}
