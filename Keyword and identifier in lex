@@ -1,0 +1,15 @@
+%{
+#include<stdio.h>
+%}
+%%
+[if|else|if else|for|while|int|switch|break|do|printf|scanf|return|float|main]+ {printf("\n keyword\n");}
+.+[a-zA-Z0-9]+ {printf("\n identifier\n");}
+%%
+int yywrap(){}
+int main()
+{
+printf("enter the word\n");
+yylex();
+printf("\n");
+return 0;
+}
